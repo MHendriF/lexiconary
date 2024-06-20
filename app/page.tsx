@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <main>
       <Banner changeWord={setWord} />
-      <section className="absolute top-[60vh] bg-white w-[80%] ml-[10%] shadow-2xl p-5 rounded-2xl">
+      <section className="absolute top-[400px] bg-white w-[80%] ml-[10%] shadow-2xl p-5 rounded-2xl mb-20">
         <div className="flex justify-between">
           <span className="shadow-md px-6 py-2 rounded-lg bg-green-600 text-white">
             {" "}
@@ -57,7 +57,7 @@ export default function Home() {
                 <span className="h-[10px] w-[10px] bg-blue-300 rounded-full inline-block"></span>{" "}
                 {`phonetic:${dictionary[0]?.phonetics[1]?.text}`}
               </span>
-              <span className="shadow-md px-6 py-2 rounded-lg bg-blue-600 text-white">
+              <span className="shadow-md px-2 py-2 rounded-lg bg-blue-600 text-white">
                 <Volume2 className="cursor-pointer" onClick={() => handleTextToSpeech(word)} />
               </span>
             </div>

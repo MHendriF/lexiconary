@@ -52,7 +52,7 @@ export default function Banner({ changeWord }: { changeWord: any }) {
     //   </form>
     // </div>
 
-    <div className="h-[40rem] w-full bg-neutral-950 relative flex flex-col items-center justify-center ">
+    <div className="h-[35rem] w-full bg-neutral-950 relative flex flex-col items-center justify-center ">
       <BackgroundBeams />
       <form className="w-2/5">
         <label htmlFor="default-search" className="mb-2  text-sm font-medium text-gray-900 sr-only dark:text-white">
