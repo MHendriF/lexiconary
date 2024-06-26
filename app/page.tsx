@@ -5,7 +5,8 @@ import { Volume2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [word, setWord] = useState("hello");
+  const [word, setWord] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dictionary, setDictionary] = useState<any>();
 
   const handleTextToSpeech = (text: string) => {
@@ -22,6 +23,7 @@ export default function Home() {
       .then(async (res) => {
         const data = await res.json();
         setDictionary(data);
+        setIsLoading(false);
 
         const track: any = {
           url: data[0]?.phonetics[0]?.audio,
@@ -30,16 +32,16 @@ export default function Home() {
         };
 
         console.log(data);
-        console.log("🚀 ~ origin:", dictionary[0]?.origin);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   }, [word]);
 
   return (
     <main>
-      <Banner changeWord={setWord} />
+      <Banner changeWord={setWord} word={word} setIsLoading={setIsLoading} isLoading={isLoading} />
       <section className="absolute top-[400px] bg-white w-[80%] ml-[10%] shadow-2xl p-5 rounded-2xl mb-20">
         <div className="flex justify-between">
           <span className="shadow-md px-6 py-2 rounded-lg bg-green-600 text-white">
@@ -63,17 +65,6 @@ export default function Home() {
             </div>
           )}
         </div>
-
-        {/* <section className="mt-5 pt-4 border-solid border-0 border-t border-gray-300">
-          <span className="shadow-md px-6 py-2 rounded-lg font-semibold bg-white text-green-700 flex items-center justify-between max-w-[120px]">
-            {" "}
-            <span className="h-[10px] w-[10px] bg-yellow-300 rounded-full inline-block"></span>Origin
-          </span>
-          <p className="py-3 text-gray-600 bg-gray-100 mt-4 px-4 rounded-lg">
-            "early 19th century: variant of earlier hollo ; related to holla."
-          </p>
-        </section> */}
-
         {dictionary?.length &&
           dictionary[0]?.meanings.map((data: any, index: number) => (
             <section key={index} className="mt-8 shadow-2xl p-5 rounded-xl bg-gray-100 ">

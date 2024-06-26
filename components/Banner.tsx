@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { BackgroundBeams } from "./BackgroundBeams";
+import { Loader2Icon } from "lucide-react";
 
-export default function Banner({ changeWord }: { changeWord: any }) {
+export default function Banner({ changeWord, word, setIsLoading, isLoading }: any) {
   const [value, setValue] = useState("");
 
   return (
@@ -80,20 +81,27 @@ export default function Banner({ changeWord }: { changeWord: any }) {
             type="search"
             id="default-search"
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white"
-            placeholder="Find word..."
+            placeholder="Find a word..."
             onChange={(e) => {
               setValue(e.target.value);
             }}
             required
           />
           <button
+            disabled={isLoading}
             type="button"
             onClick={() => {
               changeWord(value);
+              if (value !== word) {
+                setIsLoading(true);
+              }
             }}
-            className="text-white absolute end-2.5 bottom-2 bg-green-600 hover:bg-green-700   px-5 py-2 rounded-full mt-2 "
+            className="text-white absolute end-2.5 bottom-2 bg-green-600 disabled:bg-gray-600 hover:bg-green-700 px-5 py-2 rounded-full mt-2 "
           >
-            Search
+            <div className="flex flex-row justify-center items-center">
+              {isLoading && <Loader2Icon className="w-4 h-4 mr-1 animate-spin" />}
+              Search
+            </div>
           </button>
         </div>
       </form>
